@@ -1,0 +1,27 @@
+{
+  "name": "acraft",
+  "version": "1.0.0",
+  "description": "create apache vhost in command line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohsen-walton/acraft.git"
+  },
+  "keywords": [
+    "apache",
+    "vhost"
+  ],
+  "author": "Mohsen Walton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohsen-walton/acraft/issues"
+  },
+  "homepage": "https://github.com/mohsen-walton/acraft#readme",
+  "devDependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0"
+  }
+}
