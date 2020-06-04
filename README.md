@@ -1,6 +1,6 @@
 every time i wanted to create new project when using apache as my server i had to do all things manually like creating site folder , editing apache virtual host config and hosts file and then restart apache service , acraft will do this for you and save time.
 # Acraft
-create apache site (virual host) with command line    
+create apache site (virtual host) with command line    
 help command:
 ```sh
 $ Acraft -h
@@ -17,7 +17,7 @@ $ npm link acraft
 # example
 
 ```sh
-$ acraft --folder-name mysite --url mysite.local
+$ sudo acraft --folder-name mysite --url mysite.local
 ```
 
 ### options
