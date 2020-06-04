@@ -20,7 +20,7 @@ module.exports = class Acraft {
      * flags logic
      * @param {*} flags 
      */
-    checkFlags(flags) {
+    executeCraft(flags) {
         /**
         * check for --folder-name and --url flags
         */

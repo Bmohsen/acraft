@@ -20,4 +20,4 @@ program
 
 
 
-app.checkFlags(program)
+app.executeCraft(program)
