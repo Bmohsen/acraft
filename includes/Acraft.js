@@ -1,5 +1,6 @@
 require("dotenv").config()
 const fs = require("fs")
+const {exec} = require("child_process")
 const chalk = require("chalk")
 /**
  * main Acraft class
@@ -12,9 +13,10 @@ const chalk = require("chalk")
  * 
  */
 module.exports = class Acraft {
-    constructor(httpPath = process.env.HTTP_PATH, vhostPath = process.env.VHOST_PATH) {
+    constructor(httpPath = process.env.HTTP_PATH, vhostPath = process.env.VHOST_PATH , hosts = process.env.HOSTS) {
         this.httpPath = httpPath
         this.vhostPath = vhostPath
+        this.hosts = hosts
     }
     /**
      * flags logic
@@ -38,11 +40,70 @@ module.exports = class Acraft {
 
         } else {
             this.httpPath = flags.httpPath + flags.folderName
-            this.createSite(this.httpPath,flags.url)
+            this.createSite(this.httpPath, flags.url)
         }
     }
 
     createSite(folderName, url) {
-        
+        try {
+            if (!fs.existsSync(folderName)) {
+                console.log(chalk.greenBright("creating directory : " + folderName))
+                fs.mkdirSync(folderName)
+
+                const config = `
+<VirtualHost *:80>
+ServerName ${url}
+DocumentRoot ${folderName}
+ErrorLog \${APACHE_LOG_DIR}/error.log
+CustomLog \${APACHE_LOG_DIR}/access.log combined
+<Directory ${folderName}/>
+Options Indexes FollowSymLinks
+AllowOverride All
+Require all granted
+</Directory>
+</VirtualHost> \n
+                `
+                const hostsConfig = `\n127.0.0.1   ${url}`
+                fs.appendFileSync(this.vhostPath,config)
+                console.log(chalk.greenBright("writing apache config..."))
+                fs.appendFileSync(this.hosts,hostsConfig)
+                console.log(chalk.greenBright("Editing hosts file..."))
+
+
+                console.log(chalk.greenBright("changing folder permission..."))
+                exec("sudo chown -R $USER " + folderName,(error,stdout,stderr) => {
+                    if (error) {
+                        console.log(chalk.red(`error ${error.message}`))
+                    }
+                    if (stderr) {
+                        console.log(chalk.redBright(`error ${error.message}`))
+                        return
+                    }
+                    console.log(chalk.greenBright(stdout))
+                })
+
+
+                console.log(chalk.greenBright("restarting apache 2 service..."))
+                exec("sudo systemctl restart apache2",(error,stdout,stderr) => {
+                    if (error) {
+                        console.log(chalk.red(`error ${error.message}`))
+                    }
+                    if (stderr) {
+                        console.log(chalk.redBright(`error ${error.message}`))
+                        return
+                    }
+                    console.log(chalk.greenBright(stdout))
+                })
+                console.log(chalk.greenBright("All good! go make somthing amazing :)"))
+
+
+            } else {
+                console.log(chalk.yellow("Directory already Exist! try a diffrent name for directory"))
+                return
+            }
+
+        } catch (error) {
+            console.log(chalk.red(error))
+        }
     }
 }
