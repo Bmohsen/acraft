@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "create apache vhost in command line",
   "main": "index.js",
+  "bin": {
+    "acraft": "./index.js"
+  },
   "scripts": {
+    "acraft": "index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
@@ -21,11 +25,10 @@
     "url": "https://github.com/mohsen-walton/acraft/issues"
   },
   "homepage": "https://github.com/mohsen-walton/acraft#readme",
-  "devDependencies": {
-    "chalk": "^4.0.0",
-    "commander": "^5.1.0"
-  },
+  "devDependencies": {},
   "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
     "dotenv": "^8.2.0"
   }
 }

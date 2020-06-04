@@ -32,6 +32,12 @@ module.exports = class Acraft {
             return
         }
         /**
+         * check for hosts flag
+         */
+        if (flags.changeHosts != undefined) {
+            this.hosts = flags.changeHosts
+        }
+        /**
          * Check for --http-path
          */
         if (flags.httpPath == undefined) {
