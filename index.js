@@ -1,5 +1,6 @@
 #!/usr/bin/node
 const fs = require('fs')
+const path = require('path')
 const { Command } = require('commander')
 const chalk = require("chalk")
 const Acraft = require("./includes/Acraft")
@@ -22,3 +23,5 @@ program
 
 
 app.executeCraft(program)
+
+

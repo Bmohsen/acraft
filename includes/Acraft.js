@@ -1,7 +1,10 @@
-require("dotenv").config()
+const path = require('path')
 const fs = require("fs")
 const {exec} = require("child_process")
 const chalk = require("chalk")
+const appDir = path.dirname(require.main.filename)
+require("dotenv").config({path: appDir + '/.env'})
+
 /**
  * main Acraft class
  * @param httpPath
@@ -42,6 +45,7 @@ module.exports = class Acraft {
          */
         if (flags.httpPath == undefined) {
             this.httpPath += flags.folderName
+            
             this.createSite(this.httpPath, flags.url)
 
         } else {
