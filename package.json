@@ -1,6 +1,6 @@
 {
   "name": "acraft",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "create apache vhost in command line",
   "main": "index.js",
   "bin": {

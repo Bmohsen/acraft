@@ -32,3 +32,6 @@ Options:
   -h, --help                  display help for command
   ```
   you can change default http path , vhost path and hosts file in .env file
+
+### fixes
+1.0.2 fix env path when using npm link
